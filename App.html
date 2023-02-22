@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+    <link type="text/css" rel="stylesheet" href="./App.css" >
+</head>
+<body>
+    <h1>Juego del Ahorcado</h1>
+    <div class="game-box">
+         <div>
+        <div id="draw-game-info" class="draw-game-info">
+        <h2 class="game-info">Bienvenido al juego del ahorcado</h2>
+        </div>
+    <div id="draw-game-image" class="draw-game-image">
+        <img class="classimg" src="img/Modelo_ahorcado.png">
+    </div>
+    </div>
+    <div class="letters-game">
+        
+        <form class="input-form">
+            <input type="text" id="letter-input" name="letter-input" 
+            placeholder="Introduce una letra" size="13px" maxlength="1" >
+            <button class="button-form" type="button" onclick="GetLetter()">Enviar</button>
+        </form><br>
+            <section class="check-results" id="check-results"></section><br>
+            <section class="wordDashes" id="wordDashes"></section><br>
+            <section id="letters-entered"></section><br>
+   </div> 
+</div>
+    <section class="lose-msg" id="lose-msg"></section>
+<div class="divBoton"><button id="boton" class="boton" 
+    onclick="StartGame()">Iniciar juego</button></div>
+
+
+    <script src="App.js"></script>
+</body>
+</html>
+
