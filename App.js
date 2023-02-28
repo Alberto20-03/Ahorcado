@@ -4,15 +4,20 @@ const LoseText = document.getElementById("lose-msg")
 const LetterSelectResults = document.getElementById("check-results")
 const LetterSelects = document.getElementById("letters-entered")
 const LetterInput = document.getElementById("letter-input")
-
 const dash = document.getElementById("wordDashes")
 const arrayWords = ['Platillo', 'Orientarse', 'Piso', 'Escuchar', 'Vara', 'Tablero', 'Desfilar', 'Vena', 'Microondas', 'Fotos', 'Forjar', 'Azules', 'Joya', 'Esparcir', 'Bacteria', 'Berenjena', 'Alcantarilla', 'Vino', 'Lagarto', 'Copiar', 'Arriba', 'Miel', 'Encargado',
                     'Sabanas', 'Surcar', 'Lapicera', 'Uniforme', 'Palmada', 'Comunista', 'Molestar']
+
+
 const word = ChosenWord();
 const wordDash = word.toString().replace(/,/g, "");
 var count = 0;
 var acertadas = 0;
-var guiones = ""
+var guiones = "";
+var stringLetters = [];
+var LetrasIntroducidas = new Set([])
+var LetrasArray = Array.from(LetrasIntroducidas)
+var contadorRepetidas = 0;
 
 
 function PrintGameInfo() {
@@ -56,11 +61,31 @@ function Fallo() {
 }
 function GetLetter () {
     var chooseLetter = document.getElementById("letter-input").value.toUpperCase()
-    CheckLetter(chooseLetter)  
-    return chooseLetter;
+    if(chooseLetter == "") {
+        LetterSelectResults.innerHTML = '¡Introduce una letra!'
+    }else{
+        ValidateLetter(chooseLetter)
+    }
+    console.log('La palabra es: ' + wordDash)
 }
+function ValidateLetter(letter) {
+             if (LetrasIntroducidas.has(letter)){
+                contadorRepetidas++
+                  console.log("Contador repetidas: " + contadorRepetidas)
+                  LetterSelectResults.innerHTML = '¡Has repetido letra, introduce otra!'
+                  /*Al no ser un for, no recorre valor por valor y hace que no se siga 
+                  ejeutando el código y esperar una nueva letra*/
+                }else{
+                  CheckLetter(letter)  
+                }
+                LetrasIntroducidas.add(letter);
+             }
+    
+    console.log('Nº letras introducidas: ' + LetrasIntroducidas.size)
+
 function CheckLetter (letter) {
-    console.log('La palabra es: ' + word)
+    console.log('letter: ' + letter) 
+    console.log("letras introducidas: " + LetrasArray)
     let CheckLetterAcertadas = 0;
   for (let i = 0; i < word.length; i++) {
         if (letter == word[i]) {
@@ -70,7 +95,7 @@ function CheckLetter (letter) {
         if (CheckLetterAcertadas > 0) {
             LetterSelectResults.innerHTML = '¡Has acertado!'
         }else {
-            Fallo()
+            Fallo() //Cambiar 
             LetterSelectResults.innerHTML = '¡Has fallado!'
         }
     CheckWinner()
@@ -92,8 +117,6 @@ function PrintDash () {
 }
 function CheckLetterDash (letter) {
     let cadenaDash = "";
-    console.log('letter: ' + letter) 
-    console.log(wordDash)
     for (let i = 0; i < wordDash.length; i++) {
         if (letter == wordDash[i]) {
             cadenaDash = cadenaDash + wordDash[i] + " ";
@@ -105,5 +128,4 @@ function CheckLetterDash (letter) {
         guiones = cadenaDash;
         dash.innerHTML = guiones;
 }
-console.log(word.length)
 
