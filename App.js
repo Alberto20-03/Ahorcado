@@ -16,7 +16,6 @@ var acertadas = 0;
 var guiones = "";
 var stringLetters = [];
 var LetrasIntroducidas = new Set([])
-var LetrasArray = Array.from(LetrasIntroducidas)
 var contadorRepetidas = 0;
 
 
@@ -85,7 +84,6 @@ function ValidateLetter(letter) {
 
 function CheckLetter (letter) {
     console.log('letter: ' + letter) 
-    console.log("letras introducidas: " + LetrasArray)
     let CheckLetterAcertadas = 0;
   for (let i = 0; i < word.length; i++) {
         if (letter == word[i]) {
